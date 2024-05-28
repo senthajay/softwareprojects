@@ -1,0 +1,172 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newhomes</title>
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <style>
+        
+        .header{
+        display:flex;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.726);
+        margin-bottom: 2rem;
+      }
+
+      .main-content{
+        padding: 0px,20px;
+      }
+
+      .invoice-container{
+        
+        max-width: 1240px;
+        margin:auto;
+        
+        margin-top: 2rem;
+        padding:1rem;
+        background: #fff;
+      }  
+      .top{
+        margin-bottom: 1rem;
+      }
+      .top-left{
+        text-transform: uppercase;
+        text-shadow: 2px 2px 2px rgb(120, 118, 118) ;
+      }
+
+      .table-bill{
+        max-width: 1240px;
+        margin:auto;
+        padding:1rem;
+        background: #fff;
+        justify-content: space-evenly;
+        align-items: center;
+
+      }
+
+      .table-bill table{
+        max-width: auto;
+        background-color: #fff;
+        margin-left: 170px;
+
+          
+      }
+    .table-bill th,td{
+        
+        text-align: center;
+        padding: 20px 20px;
+        
+      }
+      .table-bill th{
+        text-transform: uppercase;
+        
+                color:black;
+                font-family: monospace;
+                font-size:120%;
+                font-weight: bold;
+                color: blue;
+                
+        
+      }
+      .table-bill .bi{
+        padding-right:1rem;
+      }
+
+      .table-bill .pc{
+        padding-right:1rem;
+      }
+      .table-bill .pn{
+        padding-left:1rem;
+      }
+      .table-bill .pp{
+        padding-left: 1rem;
+      }
+      .table-bill .amt{
+        padding-left: 1rem;
+      }
+      .table-bill .pay{
+        padding-right:1rem;
+      }
+      .table-bill td{
+        font-family: monospace;
+        font-size: 120%;
+        
+      }
+    </style>
+</head>
+<body style="background-color: rgba(243, 239, 239, 0.918);">
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+            <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;color: beige;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+        </nav>
+    </header>         
+    <div class="main-content">
+        <div class="invoice-container">
+            <div class="top">
+                <div class="top-left">
+                    <h1 style=" color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:200%; text-align: center;">PAYMENT STATUS </h1>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="table-bill" >
+            <table class="table-service">
+                <thead>
+                    <th class="bi">Buyer ID</th>
+                    <th class="pc">First Name</th>
+                    <th class="pn">Last Name</th>
+                    <th class="pp">Email</th>
+                    <th class="amt">Amount</th>
+                    <th class="pay">Payment Status</th>
+                </thead>
+                {% if buyer %}
+                <tbody>
+                    <tr>
+                        <td> {{buyer.id}} </td>
+                        <td> {{buyer.fname}} </td>
+                        <td> {{buyer.lname}} </td>
+                        <td> {{buyer.email}} </td>
+                        <td> <i class="bi bi-currency-pound"></i>{{total}} </td>
+                        <td>
+                            {% if buyer.paymentstatus == 1 %}
+                            <p style="text-align:center; color: rgba(52, 154, 42, 0.804);font-family:'Courier New', Courier, monospace;  font-weight: bold; font-size: 200%;text-shadow: 2px 2px 2px rgb(179, 182, 179) ;">PAID </p>
+                            {% else %}
+                            <p style="text-align:center; color: rgba(234, 35, 35, 0.804);font-family: monospace; font-weight: bold;text-shadow: 2px 2px 2px rgb(179, 182, 179) ;font-size: 200%;">UNPAID </p>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                </tbody>
+                {% endif %}
+
+<!--body>
+    {% if buyer %}
+    
+    <div class=" rounded-circle" style="text-align: center;">
+        <div class="col-sm-4">
+        <h1  style="text-align:center; color: rgba(14, 14, 14, 0.804); font-family: monospace; font-size: 300%;text-transform: uppercase;">BUYER- Payment INFO</h1>
+        <p  style="text-align: center; color: rgba(44, 44, 43, 0.804); font-family: monospace; font-size:210%;">First Name: {{buyer.fname}}</p>
+        <p  style="text-align: center; color: rgba(44, 44, 43, 0.804); font-family: monospace; font-size:210%;">Last Name: {{buyer.lname}}</p>
+        <p  style="text-align: center; color: rgba(44, 44, 43, 0.804); font-family: monospace; font-size:210%;">Email Id: {{buyer.email}}</p>
+        {% if buyer.paymentstatus == 1 %}
+        <p style="text-align:center; color: rgba(44, 44, 43, 0.804);font-family: monospace; font-size:300%;" >Payment Status:</p><p style="text-align:center; color: rgba(52, 154, 42, 0.804);font-family: monospace; font-size:300%; font-weight: bold;">PAID </p>
+        {% else %}
+        <p style="text-align:center; color: rgba(44, 44, 43, 0.804);font-family: monospace; font-size:300%;" >Payment Status:</p><p style="text-align:center; color: rgba(234, 35, 35, 0.804);font-family: monospace; font-size:300%; font-weight: bold;">UNPAID </p>
+        {% endif %}
+        </div>
+
+
+    </div>
+    {% endif %}
+</body-->
+</html>
+{% endblock %}

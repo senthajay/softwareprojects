@@ -1,0 +1,102 @@
+{% extends 'builderbase.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <title>Upload new properties</title>
+
+<!--style-->
+    <style>
+        .form-control-file{
+         
+         width: fit-content;
+        }
+
+        body{
+            background-image: url("https://media.istockphoto.com/id/692718260/photo/opened-wooden-door-to-modern-home-exterior-as-background.jpg?s=612x612&w=0&k=20&c=Xc1pBha7V1QYZJ5ey6g4mrciD0LgRgMdcfWTVFTKf6o=");
+        background-repeat: repeat;
+        background-size:cover;
+        
+        }
+        .container {
+        padding: 28px;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(100, 98, 98, 0.804);
+        box-shadow: inset 2px 2px 2px rgb(129, 129, 156);
+        border-radius: 10px;
+        font-family:sans-serif;
+        font-size: 110%;
+        color: rgb(241, 243, 245);
+    }
+    
+
+    .cal-input-box label{
+        
+        color:rgb(249, 244, 244);
+        font-family:sans-serif;
+        font-size: 110%;
+        
+
+    }
+    .cal-input-box input{
+        
+        border-radius: 7px;
+        outline: none;
+        border:1px grey
+
+
+    }
+     </style>
+<!--style-->
+</head>
+<body>
+    
+</body>
+</html>
+
+<body>
+
+    <h1 style="text-align: center;font-family: monospace;font-size: 150%;">Upload New properties to NewhomeBuilders Site</h1>
+    <br>
+    <div class="container" style="text-align: left;">
+        <form method="POST" enctype="multipart/form-data" style="font-size: 110%;">
+            <div class="cal-input-box">
+                <label for="category">Select Property Category:</label><br>
+                <input type="radio" id="1bhk" name="category" value="1bhk">
+                <label for="1bhk">1 BHK</label><br>
+                <input type="radio" id="2bhk" name="category" value="2bhk">
+                <label for="2bhk">2 BHK</label><br>
+                <input type="radio" id="3bhk" name="category" value="3bhk">
+                <label for="3bhk">3 BHK</label><br>
+                <input type="radio" id="Bunglow" name="category" value="Bunglow">
+                <label for="Bunglow">bunglow</label>
+            </div>
+            <br>
+        
+            <div class="cal-input-box">
+                <label for="price">Enter Property Price:</label>
+                <input type="number" id="price" name="price" placeholder="Enter Price"required>
+                    <div class="form-group" >
+                        <label for="property_pic">Upload Property Picture:</label>
+                        <input type="file" class="form-control-file" id="property_pic" name="property_pic"style="align-content: center;">
+                    </div>
+            </div>
+            
+            <br>
+                <button type="submit"class=" btn btn-primary" style="font-family:monospace;">Add Property</button>   
+        </form>
+    </div>
+</body>
+
+{% endblock %}

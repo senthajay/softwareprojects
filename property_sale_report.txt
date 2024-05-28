@@ -1,0 +1,216 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>newhomes</title>
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <style>
+        
+        .header{
+        display:flex;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.726);
+        margin-bottom: 2rem;
+      }
+
+      .main-content{
+        padding: 0px,20px;
+      }
+
+      .invoice-container{
+        
+        max-width: 1240px;
+        margin:auto;
+        
+        margin-top: 2rem;
+        padding:1rem;
+        background: #fff;
+      }  
+      .top{
+        margin-bottom: 1rem;
+      }
+      .top-left{
+        text-transform: uppercase;
+        text-shadow: 2px 2px 2px rgb(164, 161, 161)  ;
+      }
+
+      .table-bill{
+        max-width: 1240px;
+        margin:auto;
+        padding:1rem;
+        background: #fff;
+        justify-content: space-evenly;
+        align-items: center;
+
+      }
+      
+      .table-bill table{
+        max-width: auto;
+        background-color: #fff;
+        margin-left: 50px;
+
+          
+      }
+    .table-bill th,td{
+        
+        text-align: center;
+        padding: 20px 20px;
+        
+      }
+      .table-bill th{
+        text-transform: uppercase;
+        
+                color:black;
+                font-family: monospace;
+                font-size:120%;
+                font-weight: bold;
+                color: blue;
+                
+        
+      }
+      .table-bill .bi{
+        padding-right:1rem;
+      }
+
+      .table-bill .pc{
+        padding-right:1rem;
+      }
+      .table-bill .pn{
+        padding-left:1rem;
+      }
+      .table-bill .pp{
+        padding-left: 1rem;
+      }
+      .table-bill .amt{
+        padding-left: 1rem;
+      }
+      .table-bill .total_one{
+        padding-right:1rem;
+      }
+      .table-bill .total_sold_one{
+        padding-right:1rem;
+      }
+      .table-bill .total_two{
+        padding-right:1rem;
+      }
+      .table-bill .total_sold_two{
+        padding-right:1rem;
+      }
+      .table-bill .total_three{
+        padding-right:1rem;
+      }
+      .table-bill .total_sold_three{
+        padding-right:1rem;
+      }
+      .table-bill td{
+        font-family: monospace;
+        font-size: 120%;
+        
+      }
+    </style>
+</head>
+<body style="background-color: rgba(243, 239, 239, 0.918);">
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+            <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;color: beige;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+        </nav>
+    </header>         
+    <div class="main-content">
+        <div class="invoice-container">
+            <div class="top">
+                <div class="top-left">
+                    <h1 style=" color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:200%; text-align: center;">NEWHOMES PROPERTY SALES REPORT </h1>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="table-bill" >
+            <table class="table-service" style="border: 1px solid rgb(12, 12, 12); border-collapse: collapse; margin: 70px; width: 1100px;">
+                <thead>
+                    <th class="pp" style="border: 1px solid rgb(12, 12, 12); padding: 20px;">Total properties </th>
+                    <th class="amt" style="border: 1px solid rgb(12, 12, 12); padding: 20px;">Avalaible properties (unsold )</th>
+                    <th class="bi" style="border: 1px solid rgb(12, 12, 12); padding: 20px;">Sold Properties</th>
+                    <th class="pc" style="border: 1px solid rgb(12, 12, 12); padding: 20px;">Average Property sale</th>
+                    <th class="pn" style="border: 1px solid rgb(12, 12, 12); padding: 20px;">Total Sales Revenue</th>
+                    
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td style="border: 1px solid rgb(12, 12, 12); padding: 20px;">{{total_properties}}</td>
+                        <td style="border: 1px solid rgb(12, 12, 12); padding: 20px;">{{available_properties}}</td>
+                        <td style="border: 1px solid rgb(12, 12, 12); padding: 20px;"> {{salesreport[0]}} </td>
+                        <td style="border: 1px solid rgb(12, 12, 12); padding: 20px;"> <i class="bi bi-currency-pound" style="color: black;"></i>{{salesreport[1]}} </td>
+                        <td style="border: 1px solid rgb(12, 12, 12); padding: 20px;"> <i class="bi bi-currency-pound" style="color: black;"></i>{{salesreport[2]}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <br>
+                <h2 style=" color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:150%; text-align: center;text-shadow: 2px 2px 2px rgb(164, 161, 161) ;"> MONTHLY SALES GRAPH REPORT</h2>
+                {{ chart_html1|safe}}
+                <br>
+                <h2 style=" color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:150%; text-align: center;text-shadow: 2px 2px 2px rgb(164, 161, 161) ;">PROPERTY SALES BASED ON CATEGORY</h2>
+                <div class="table-bill" >
+                  <table class="table-service" style="border: 1px solid black; border-collapse: collapse; margin: 70px; width: 1100px;">
+                      <thead>
+                          <th class="total_one"style="border: 1px solid black; padding: 20px;">1BHK PROPERTIES</th>
+                          <th class="total_sold_one"style="border: 1px solid black; padding: 20px;">1BHK- SOLD </th>
+                          <th class="total_two"style="border: 1px solid black; padding: 20px;">2BHK PROPERTIES</th>
+                          <th class="total_sold_two"style="border: 1px solid black; padding: 20px;">2BHK- SOLD</th>
+                          <th class="total_three"style="border: 1px solid black; padding: 20px;">3BHK PROPERTIES</th>
+                          <th class="total_sold_three"style="border: 1px solid black; padding: 20px;">3BHK- SOLD</th>
+                          
+                      </thead>
+                      
+                      <tbody>
+                          <tr>
+                              <td style="border: 1px solid black; padding: 20px;">{{category1bhk}}</td>
+                              <td style="border: 1px solid black; padding: 20px;">{{sold_category1bhk}}</td>
+                              <td style="border: 1px solid black; padding: 20px;">{{category2bhk}}</td>
+                              <td style="border: 1px solid black; padding: 20px;">{{sold_category2bhk}}</td>
+                              <td style="border: 1px solid black; padding: 20px;">{{category3bhk}}</td>
+                              <td style="border: 1px solid black; padding: 20px;">{{sold_category3bhk}}</td>
+                              
+                              
+                          </tr>
+                      </tbody>
+                  </table>
+                
+                {{ chart_html2|safe}}
+                
+</body>               
+</html>
+                
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

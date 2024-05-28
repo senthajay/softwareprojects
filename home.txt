@@ -1,0 +1,50 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home</title>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" integrity="sha384-DjKgWsC8bAzOgBcTAxKvXfWtX8PqGJ/QD9aHwKjJW8yNfIOW+F1xNvQ2H01W8JqI" crossorigin="anonymous">
+
+</head>
+<body>
+
+    <div class=" container py-4">
+        {% if 'username' in session %}
+            <div class="row">
+                <div class="col-12">
+                    <h2>Welcome, {{ fname }}</h2>
+                </div>
+            </div>
+            <!--profile pic later-->
+
+            <div class="col-md-9">
+                <p>Tel No: {{ phone }}</p>
+                <p>Email Address: {{ email }}</p>
+                <p>Address: {{ address }}</p>
+                <a href="/reserved_property" class="btn btn-primary me-2">View My Reserved Property</a>
+                <a href="/smart_tools" class="btn btn-secondary">View Smart Tools</a>
+
+            </div>
+
+    
+        {% else %}
+            <div class="row">
+                <div class="col-12">
+                    <a href="/login" class="btn btn-primary">Login</a>
+                    <a href="/register" class="btn btn-secondary">Register</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-9RJ/aG8bN7hTtzFO0uK7SxfNxWYw8xVhFWg6HyOT7VUyW2uBTHK+vM2QQuhFdPfH" crossorigin="anonymous"></script> <!--adatpted from bootsrap online -->
+    
+</body>
+</html>
+
+{% endblock %}

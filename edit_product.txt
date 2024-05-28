@@ -1,0 +1,88 @@
+{% extends 'builderbase.html' %} <!-- extends the base_layout deisgn using jinja2 template-->
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <title>Upload new properties</title>
+
+<!--style-->
+    <style>
+        .form-control-file{
+         
+         width: fit-content;
+        }
+
+        body{
+            background-image: url("https://media.istockphoto.com/id/692718260/photo/opened-wooden-door-to-modern-home-exterior-as-background.jpg?s=612x612&w=0&k=20&c=Xc1pBha7V1QYZJ5ey6g4mrciD0LgRgMdcfWTVFTKf6o=");
+            background-repeat: repeat;
+            background-size:cover;
+        
+        }
+        
+        .container {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(100, 98, 98, 0.804);
+        box-shadow: inset 2px 2px 2px rgb(129, 129, 156);
+        border-radius: 10px;
+        font-family:sans-serif;
+        font-size: 120%;
+        color: rgb(241, 243, 245);
+    }
+    
+
+    .cal-input-box label{
+        
+        color:rgb(249, 244, 244);
+        font-family:monospace;
+        font-size: 110%;
+        font-weight:bold;
+
+
+    }
+    .cal-input-box input{
+        
+        border-radius: 7px;
+        outline: none;
+        border:1px grey
+
+
+    }
+     </style>
+<!--style-->
+</head>
+<body>
+    
+</body>
+</html>
+<h2 style="text-align: center; font-family: monospace;font-size: 150%;">Edit products  </h2>
+<div class="container" style="text-align: left;">
+    <form method="POST"  enctype="multipart/form-data">
+        <div class="cal-input-box">
+            <label for="id">Product ID: </label>
+            <input type="number" name="id" value="{{id}}" placeholder="Enter Product ID" required>
+        </div><br>
+        <div class="cal-input-box">
+            <label for="product_name">Product Name: </label>
+            <input type="text" name="product_name" value="{{product_name}}" placeholder="Enter Product Name" required>
+        </div><br>
+        <div class="cal-input-box">
+            <label for="price">Price: </label>
+            <input type="number" name="price" value="{{price}}" placeholder="Enter Product Price" required>
+        </div><br>
+        
+
+        <button type="submit"class=" btn btn-primary" style="font-family:monospace;">Save Changes</button> 
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,241 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <!--CSS bootstrap adapted -->
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel = "stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css ">  <!--this is adapted from css bootstrap-->
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css ">    <!--this is adapted from css bootstrap-->
+
+    
+    <title>Smart tool cost plan </title>
+
+    <script>
+        function Tcost(){
+            var deposit = parseInt(document.getElementById('deposit').value) || 0;
+            var moving_expense = parseInt(document.getElementById('moving_expense').value)||0;
+            var solicitor_fee = parseInt(document.getElementById('solicitor_fee').value)|| 0;
+            var stamp_duty = parseInt(document.getElementById('stamp_duty').value)|| 0;
+            var council_tax = parseInt(document.getElementById('council_tax').value)|| 0;
+            var validation_fee = parseInt(document.getElementById('validation_fee').value)|| 0;
+            var surveyor_fee = parseInt(document.getElementById('surveyor_fee').value)|| 0;
+            var total_cost = deposit + moving_expense + solicitor_fee + stamp_duty + council_tax + validation_fee + surveyor_fee;
+            document.getElementById('total_cost').value = total_cost;
+
+        }
+        Tcost();
+    </script>
+
+  </head>
+  
+  <!--style-->
+  <style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: monospace;
+    }
+
+    header{
+        
+        margin-bottom: 2rem;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.726);
+        margin-bottom: 1rem;
+      }
+    body{
+        
+        height:100vh;
+        justify-content:center;
+        align-items: center;
+        background-image: url("https://www.santafeproperties.com/uploads/santa-fe-properties-mortgage-calculator-hero.28.jpg");
+        background-repeat: repeat;
+        background-size:cover;
+        
+        
+    }
+    
+
+    /*.container{
+
+        padding: 28px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6rem;
+        box-shadow: inset -2px 2px 2px rgb(106, 106, 108);
+        background-color: rgba(247, 244, 244, 0.788);
+        width: 100%;
+        max-width: 650px;
+
+        border-radius: 10px;
+        
+    }*/
+
+    .container {
+        padding: 28px;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+        background-color: rgba(247, 244, 244, 0.788);
+        box-shadow: inset -2px 2px 2px rgb(106, 106, 108);
+        border-radius: 10px;
+    }
+
+    .form-title{
+        padding-bottom: 26px;
+        text-shadow: 2px 2px 2px rgb(249, 247, 247) ;
+        border-bottom: solid 1px black;
+    }
+
+    .main-cal-box{
+        display:block;
+        padding: 20px 20px;
+        border-bottom: solid 1px black;
+    }
+    .cal-input-box{
+        
+        display: flex;
+        flex-wrap: wrap;
+        width: 50%;
+        text-align:center;
+        justify-content:space-between;
+        
+    }
+
+    .cal-input-box label{
+        
+        color:black;
+        font-family:monospace;
+        font-size: 110%;
+        font-weight:bold;
+
+
+    }
+    .cal-input-box input{
+        
+        border-radius: 7px;
+        outline: none;
+        border:1px grey
+
+
+    }
+    .totalc{
+        margin-top: 1rem;
+        text-align: center;
+        font-family: monospace;
+        font-size: 200%;
+
+    }
+    .totalc input{
+        background-color: rgba(247, 244, 244, 0.788);
+        border-radius: 10px;
+        border:rgba(247, 244, 244, 0.788);
+        
+    }
+    
+    
+</style>
+<!--/style-->
+
+  <body style="background-color: rgba(243, 239, 239, 0.918);"> 
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+            <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+        </nav>
+    </header>
+   <div class=" container">
+        <h1><div class="form-title" style="text-align: center;font-family: monospace;color: rgb(14, 15, 15); text-transform: uppercase;">Cost Planner Tool</h1><br>
+            <form action="{{ url_for('costplan') }}" method="POST">
+                <div class="main-cal-box">
+                    
+                    
+                    <div class="cal-input-box">
+                        <label for="deposit"> Deposit  <i class="bi bi-currency-pound"></i></label>
+                        <input  type="number" id="deposit" name="deposit"oninput="Tcost()"  placeholder="Enter Deposit" required > 
+                    </div>
+<br>
+                    <div class="cal-input-box">
+                        <label for="moving_expense"> Moving Expense  <i class="bi bi-currency-pound"></i> </label>
+                        <input  type="number" id="moving_expense" name="moving_expense"oninput="Tcost()" placeholder="Enter moving expense" required > 
+                    </div>
+<br>                    
+
+                    <div class="cal-input-box">
+                        <label for="solicitor_fee">Solicitor Fee<i class="bi bi-currency-pound"></i> </label>
+                        <input  type="number" id="solicitor_fee" name="solicitor_fee"oninput="Tcost()" placeholder="Enter solicitor fee" required> 
+                    </div>
+<br>                    
+
+                    <div class="cal-input-box">
+                        <label for="stamp_duty"> Stamp Duty  <i class="bi bi-currency-pound"></i> </label>
+                        <input  type="number" id="stamp_duty" name="stamp_duty"oninput="Tcost()" placeholder="Enter stamp duty"required > 
+                    </div>
+<br>                    
+
+                    <div class="cal-input-box">
+                        <label for="council_tax"> Council Tax  <i class="bi bi-currency-pound"></i> </label>
+                        <input  type="number" id="council_tax" name="council_tax"oninput="Tcost()" placeholder="Enter council tax"required> 
+                    </div>
+<br>                    
+
+                    <div class="cal-input-box">
+                        <label for="validation_fee"> Validation Fee  <i class="bi bi-currency-pound"></i> </label>
+                        <input  type="number" id="validation_fee" name="validation_fee"oninput="Tcost()" placeholder="Enter validation fee"required> 
+                    </div>
+<br>                    
+
+                    <div class="cal-input-box">
+                        <label for="surveyor_fee"> Surveyor Fee  <i class="bi bi-currency-pound"></i> </label>
+                        <input type="number" id="surveyor_fee" name="surveyor_fee" oninput="Tcost()" placeholder=" enter surveyor fee"required> 
+                    </div>
+<br>                   
+                    <!--div class="cal-input-box">
+                        <label for="total_cost"> Total Cost : </label>
+                        
+                        <input  type="number" id="total_cost" name="total_cost" value="{{ total_cost }}" readonly> 
+                    </div-->
+                    
+                </div>
+                <!--div class="form-submit-btn">
+                    <button type="submit" class="btn btn-primary" value="submit" >Total Cost </button> <i class="bi bi-currency-pound"></i>{{ total_cost }}
+                </div-->
+                <div class="totalc">
+                    <label for="total_cost">Total Cost <i class="bi bi-currency-pound"></i></label>
+                    <input  type="number" id="total_cost" name="total_cost" value="{{ total_cost }}" readonly>
+                        
+       
+                </div>
+                
+                     
+                </div>
+            
+            
+
+        </div>
+    </div>
+    <!--Bootstrap adapted-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+
+  </body>
+ 
+  
+  
+  <!---->
+  
+  
+  </form>
+  </body>
+</html>
+  

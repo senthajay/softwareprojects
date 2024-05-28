@@ -1,0 +1,146 @@
+{% block content %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Make Payment Page</title>
+    <script src="https://js.stripe.com/v3/"></script> <!--adapted from stripe.com to integrate js-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css ">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+      .header{
+        display:flex;
+        margin-bottom: 20px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.726);
+        margin-bottom: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+          <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;color: beige;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"> </span>
+          </button>
+      </nav>
+  </header>   
+    <br><br><br>
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header" style = "background-color: #2d972d;">
+              <h1 class="h4"style="font-size:150%;font-family:monospace;color:white;font-weight:bold;text-shadow: 2px 2px 2px rgb(179, 182, 179) ;">MAKE PAYMENT (TOTAL AMOUNT) <i class="bi bi-currency-pound"></i> {{total}}</h1>
+            </div>
+            <div class="card-body">
+              {% if buyer %}
+              <form method="POST" action="/payment/{{buyer.id}}" id="payment-form">
+                <div class="form-group">
+                  <label for="amount"style="font-size: 120%; color: rgba(10, 10, 10, 0.804);font-family: monospace;">Amount <i class="bi bi-currency-pound"></i>:</label>
+                  <input type="text" class="form-control" id="amount" name="amount" required>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="description"style="font-size: 120%; color: rgba(10, 10, 10, 0.804);font-family: monospace;">Refernce :</label>
+                  <input type="text" class="form-control" id="description" name="description" required>
+                </div>
+                <br>
+                <div class="form-group">
+                  <label for="card-element"style="font-size: 120%; color: rgba(10, 10, 10, 0.804);font-family: monospace;">Credit or Debit Card</label>
+                  <div  class="form-control" id="card-element"></div>
+                  <div id="card-errors" role="alert" class="error-message"></div>
+                </div>
+                <button id = "make-payment-button" type="submit"  class="btn btn-success">Pay Now <i class="bi bi-currency-pound"></i>{{total}}</button>
+              </form>
+              {% endif %}
+
+              
+              
+          
+
+    <!--h1>Make Payment</h1>
+    {% if buyer %}
+    <form action="/payment/{{buyer.id}}" method="POST" id="payment-form">
+      <label for="amount">
+        Amount <i class="bi bi-currency-pound"></i>: 
+      </label>
+      <input type="text" id="amount" name="amount" required>
+
+      <label for="description">
+        reference:
+      </label>
+      <input type="text" id="description" name="description" required>
+
+      <label for="card-element">
+        Credit or debit card:
+      </label>
+      <div id="card-element"></div>
+      <div id="card-errors" role="alert" class="error-message"></div>
+
+      <button type="submit">Pay Now</button>
+    </form>
+    {% endif %}-->
+    
+    
+    
+    <script>
+      // Create a Stripe client
+      var stripe = Stripe("pk_test_51N15rvFxgziGaiKJCSUCuLNARegbA4JoHOy6xr733VE1jgjtydSsAYbLccU16Hq040WnOChclAiRC16eKljOqb0M00DL1uZF8k");
+
+      // Create an instance of Elements
+      var elements = stripe.elements();
+
+      // Create a Card Element and mount it on the page
+      var card = elements.create("card");
+      card.mount("#card-element");
+      
+      // Handle real-time validation errors from the card Element.
+      card.addEventListener("change", function (event) {
+        var displayError = document.getElementById("card-errors");
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = "";
+        }
+      });
+
+      // Handle form submission
+      var form = document.getElementById("payment-form");
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var amount = document.getElementById("amount").value;
+        var description = document.getElementById("description").value;
+
+        // Create a token with the card details
+        stripe.createToken(card).then(function (result) {
+          if (result.error) {
+            // Inform the user if there was an error
+            var errorElement = document.getElementById("card-errors");
+            errorElement.textContent = result.error.message;
+          } else {
+            // Send the token to your server
+            stripeTokenHandler(result.token, amount, description);
+          }
+        });
+      });
+
+      // Send the token to your server
+      function stripeTokenHandler(token, amount, description) {
+        // Insert the token ID into the form so it gets submitted to the server
+        var form = document.getElementById("payment-form");
+        var hiddenInput = document.createElement("input");
+        hiddenInput.setAttribute("type", "hidden");
+        hiddenInput.setAttribute("name", "stripeToken");
+        hiddenInput.setAttribute("value", token.id);
+        form.appendChild(hiddenInput);
+
+        // Submit the form
+        form.submit();
+      }
+    </script>
+    
+  </body>
+</html>
+{% endblock %}

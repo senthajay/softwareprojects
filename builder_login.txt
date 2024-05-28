@@ -1,0 +1,42 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+<br><br><br>
+<div class="container">
+    <h2 class="text-left" style="color: rgba(5, 33, 41, 0.804); font-family: monospace; font-size: 200%; text-transform: uppercase;"> Builders Hub - Login</h2>
+    
+    {% if error %}
+        <p class="text-danger">{{ error }}</p>
+    {% endif %}
+<br>
+    <form method="POST" action="/builder_login" class="form-horizaontal">
+        <div class="form-group">
+            <label for="username" class="control-label col-sm-2" style="color: rgba(5, 33, 41, 0.804); font-family: monospace; font-size: 120%;" >username:</label>
+            <div class="col-md-6">
+                <input type="text" name="username" class="form-control" required>  
+            </div>
+        </div>
+
+        <div class="form-group" >
+            <label for="password" class="control-label col-sm-2" style="color: rgba(5, 33, 41, 0.804);font-family: monospace;font-size: 120%;"  >Password:</label>
+            <div class="col-md-6">
+                <input type="password" name="password" class="form-control" required>  
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success" style="background-color:rgba(5, 33, 41, 0.804);font-family: monospace;font-size: 120%;text-transform: uppercase;" >L O G I N </button>
+            </div>
+            
+        </div>
+
+
+
+
+    </form>
+
+
+</div>
+
+{% endblock %}

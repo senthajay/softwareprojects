@@ -1,0 +1,134 @@
+{% extends 'builderbase.html' %} <!-- extends the base_layout deisgn using jinja2 template-->
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Buyer Dashboard</title>
+    <!--CSS Bootstrap links  adpated  -->
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel = "stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css "> 
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css ">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <!--CSS Bootstrap Links adapted-->
+
+    <!--style-->
+    <style>
+        .main{
+            margin-left: 600px;
+            justify-content: space-evenly;
+            max-width: 1440px;
+        }
+        .main table{
+            padding: 50px 50px;
+            max-width: auto;
+            
+        }
+        .main th,td{
+            padding: 20px 20px;
+        }
+
+        /* grid container*/
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+
+        }
+
+        .table .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 20px;
+
+
+        }
+
+        .item{
+            position: relative;
+        }
+
+        .item img{
+            display: block;
+            width: 100%;
+            height: 55%;
+            
+            
+        }
+    </style>
+    <!--style-->
+
+</head>
+
+<br>
+<h2 style="font-family: monospace;font-size:150%;text-align: center;">NewHomes Products - STOCK LEVELS</h2>
+<body>
+
+    <form method="POST" action="/builder_stock_dashboard" style="text-align: center;">
+        <label for="category_choice_extra">Category:</label>
+        <select id="category_choice_extra" name="category_choice_extra"style="height:2rem;width:10rem;text-align: center;font-size: 120%;">
+            <option value="">--select--</option>
+            <option value="choice">choice</option>
+            <option value="extra">extra</option>
+        </select>
+        <button type="submit"class="btn-primary" style="font-family:monospace;font-size: 120%;text-transform: uppercase;">Select</button>
+    </form>
+    <a  href="{{ url_for('update_stock')}}" class="btn btn-warning" style="margin-left: 1400px;font-family: monospace;font-size: 130%;">UPDATE STOCK</a>
+    
+    <br><br>
+
+    
+    
+    <!--Choices -->
+    {% if type=="choice" %}
+    <h2 style="text-align:center;font-family:monospace; font-size: 140%; color: rgba(10, 10, 10, 0.804);">CHOICES</h2>
+    <body>
+        <div class="container">
+            {% for choice in stocks %}
+            
+            <div class="item">
+                
+                <img src="{{ url_for('static', filename=choice.product_pic) }}" alt="{{ choice.product_name }}">
+                
+
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace; font-size: 140%;"> Product ID {{choice.id}}</h2>
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace;font-size: 140%;">Product Name: {{choice.product_name}}</h2>
+                
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace;font-size: 140%;font-weight: bold;">STOCK LEVEL {{choice.stock}}</h2>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+    
+    {% else %}
+        <p> </p>
+    {% endif %}
+    <!--Choices  ends -->
+
+
+    <!--extras -->
+    {% if type=="extra" %}
+    <h2 style="text-align:center;font-family:monospace; font-size: 140%; color: rgba(10, 10, 10, 0.804);">EXTRAS</h2>
+    <body>
+        <div class="container">
+            {% for extra in stocks %}
+            
+            <div class="item">
+                
+                <img src="{{ url_for('static', filename=extra.product_pic) }}" alt="{{ extra.product_name }}">
+                
+
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace; font-size: 140%;"> Product ID {{extra.id}}</h2>
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace;font-size: 140%;">Product Name: {{extra.product_name}}</h2>
+                
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace;font-size: 140%;font-weight: bold;">STOCK LEVEL {{extra.stock}}</h2>
+            </div>
+            {% endfor %}
+        </div>
+    </body>
+    
+    {% else %}
+        <p style="text-align: center;">Please select a category to view stock levels</p>
+    {% endif %}
+    <!--Extras ends  -->
+{% endblock %}

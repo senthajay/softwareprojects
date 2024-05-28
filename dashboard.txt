@@ -1,0 +1,386 @@
+{% extends 'base_layout.html' %} <!-- extends the base_layout deisgn using jinja2 template-->
+{% block content %}
+{% set names=[] %}
+{% set prodid=[] %}
+{% set idname=[] %}
+{% set name=None %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Buyer Dashboard</title>
+    <!--CSS Bootstrap links  adpated  -->
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel = "stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css "> 
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css ">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <!-- adapted from Bootstrap 5 -  Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--CSS Bootstrap Links adapted-->
+
+    <style>
+        /* grid container*/
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px;
+
+        }
+
+        .table .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px;
+
+
+        }
+
+        .item{
+            position: relative;
+        }
+
+        .item img{
+            display: block;
+            width: 100%;
+            height: 55%;
+            
+            
+        }
+    
+        .w3-container  {
+           background: #ffffff;
+           width: 340px;
+           height: 440px; 
+           position: relative;
+           display:flex;
+           border-radius: 1.2rem;
+           margin:2rem;
+          
+        }
+        .w3-container:hover img{
+            scale: 1.1;
+        }
+        .property_pic{
+            max-width: 60%;
+            height:auto;
+            position: relative;
+            text-align: center;
+            border-radius: 1.2rem;
+            margin-left: 21.5rem; 
+
+            
+        }
+        
+        
+
+        .welcome{
+            margin: auto;
+            
+            padding: 2rem;
+            margin-top: 0.05rem;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(10, 10, 10, 0.804);
+            
+            
+        }
+
+        textarea {
+            
+  width: 50%;
+  background-color: rgb(240, 240, 240);
+  height: 150px;
+  padding: 10px;
+  font-size: 16px;
+  border: 3px solid #605f5f;
+  border-radius: 4px;
+  resize: vertical;
+  border-radius: 7px;
+  color: rgb(30, 30, 30);
+}
+
+textarea:focus {
+  border-color: rgb(68, 127, 255);
+}
+.label{
+        
+        color:rgb(91, 90, 90);
+        font-family:monospace;
+        font-size: 130%;
+        
+        
+}
+.m-contain {
+        
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 10px;
+    }
+       
+.pay-gtw{
+    margin-left: 1400px;
+    margin-top: -2.5rem;
+}
+           
+    </style>
+
+</head>
+<body>
+    <!-- Welcome Buyer-->
+    
+    <div class="welcome">
+        <div class="profile-picture">
+            <img src="{{ url_for('static', filename= buyer.profile_pic) }}" alt="profile pic" class="img-fluid rounded-circle" width="200px" height="100px">
+        </div>
+        <div class="col-sm-4">
+                <h1  style="text-align:center; color: rgba(253, 253, 251, 0.804); font-family: monospace; font-size: 200%;text-transform: uppercase;">Welcome &nbsp;{{buyer.fname}}</h1>
+                <p  style="text-align: center; color: rgba(253, 253, 251, 0.804); font-family: monospace; font-size:110%;">Phone: {{buyer.phone}}</p>
+                <p style="text-align:center; color: rgba(253, 253, 251, 0.804);font-family: monospace; font-size:110%;" >Address: {{buyer.address}}</p>
+        
+        </div>
+    </div>
+    <!--Welcome Buyer-->
+
+    <!--View My Reserved Property-->
+    <br>
+    <h2  style=" color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:150%; text-align: center;">MY RESERVED PROPERTY</h2>
+    {% if properties %}
+
+    {% for property in properties %}
+                <body>
+                    <br>
+                    <!--div class="w3-container"-->
+
+                        <div class="property_pic">
+                            <img src="{{ url_for('static', filename=property.property_pic)}}" alt="My Reserved Property"><br>
+                                
+                               
+                            <h2 style="text-align: center; color: rgba(10, 10, 10, 0.804); font-family: monospace;font-size:120%;">PROPERTY TYPE {{property.category}}</h2>
+                            <h2 style="text-align: center; color: rgba(10, 10, 10, 0.804);font-family: monospace;font-size:130%;"><i class="bi bi-tag-fill"></i><i class="bi bi-currency-pound"></i> {{property.price}}</h2>
+                                     
+                        </div>
+
+                    <!--/div-->
+                </body>
+                        <!--td>{{property.property_pic}}</td>
+                    </tr-->
+                {% endfor %}
+    {% else %}
+        <p> No properties reserved yet.</p>
+    {% endif %}
+    <!--View My Reserved Property-->
+
+
+    <!--Selected Choices and Extras-->
+    <br><br><br><br><br>
+    <h2  style="text-align:center;font-size:130%; color: rgba(10, 10, 10, 0.804); font-family:monospace;">CHOICES AND EXTRAS YOU SELECTED</h2><div style="text-align: center;"><i class="bi bi-bag-check-fill" style="color: black;" ></i></div>
+    {% if products_buyer %}
+
+    <body>
+        <br>
+        <div class="container">
+           
+            {% for product_buyer in products_buyer %}
+            <div class="item">
+                <img src="{{ url_for('static', filename=product_buyer.product_pic) }}" alt="{{ product_buyer.product_name }}">
+                <a href="/remove/{{ product_buyer.id }}/{{ product_buyer.buyer_id }}" <i class="bi bi-trash3-fill" style="color: #f44336;"></i>Remove</a>
+                 {%set _ =names.append(product_buyer.product_name)%}
+                 {%set _ =prodid.append(product_buyer.id)%}
+                 {%set _ =idname.append('PRODUCT_ID -'+product_buyer.id|string+' '+'PRODUCT NAME - '+product_buyer.product_name)%}
+                <h2  style="text-align:center;font-size: 100%; color: rgba(10, 10, 10, 0.804);">Category {{product_buyer.category_choice_extra}}</h2>
+                <h2  style="text-align:center;font-size: 100%; color: rgba(10, 10, 10, 0.804);">Product {{product_buyer.product_name}}</h2>
+                <h2  style="text-align:center; font-size: 120%;color: rgba(10, 10, 10, 0.804);"><i class="bi bi-tag-fill"></i><i class="bi bi-currency-pound"></i>{{product_buyer.price}}</h2>
+                
+            </div>
+            {% endfor %}
+           
+        </div>
+    
+    {% else %}
+        <p style="text-align: center;">Please make your Selection from Below products!</p>
+    {% endif %}
+    <!--Selected Choices and Extras-->
+
+    <!--custom message-->
+    <div class="m-contain">
+        <form action="/custome_message/{{buyer.id}}" method="post">
+            <div class="label">
+                <label for="message" style="text-align:center;font-size:110%; color: rgba(49, 48, 48, 0.804); font-family:monospace;">CUSTOMIZATION BOX NOTE: (OPTIONAL) </label>
+            </div>
+
+            <textarea id="message" name="message" rows="5" placeholder="If you have any message to customize your products, please give us a note !"></textarea>
+            <br>
+            <button type="submit" class="btn btn-outline-primary">Save Note</button>
+        </form>
+    </div>
+
+    <!--Invoice-->
+    <br>
+    
+    <div class="col-sm-offset-2 col-sm-10"> <!--Bootstrap CSS-->
+    <a href='/invoice/{{buyer.id}}' class="btn btn-primary" ><i class="bi bi-receipt">&nbsp;</i>Get Invoice</a>
+    </div>
+    <br> 
+    <!--Invoice -->
+
+    <!--Button payment gateway-->
+    <div class="pay-gtw"> <!--Bootstrap CSS-->
+        <a href='/payment/{{buyer.id}}' class="btn btn-primary"  id="make-payment-btn" >Make Payment</a>
+    </div>
+    <br>
+    <!--Button payment gateway--> 
+    
+    </body>
+    
+    <br><br>
+
+    <!--h2 class="navbar-brand fw-bold text-uppercase" style="text-align: left; color: rgb(251, 251, 253); ">CHOICES</h2> <br>
+    <p class="navbar-brand fw-bold text-uppercase" style="text-align: left; color: rgb(251, 251, 253); ">{{type_home}}</p>
+    {% if choices %}
+    
+        <table>
+            <thead>
+                <tr>
+                    <th class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); ">Category</th>
+                    <th class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); ">Price</th> 
+                    <th class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); ">Property Picture</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for choice in choices %}
+                {% if choice.category_home==type_home %}
+                    <tr>
+                        <td class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); ">{{ choice.product_name }}</td> 
+                        <td class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); ">{{ choice.price }}</td>
+                        <td class="fw-bold " style="text-align: left; color: rgb(251, 251, 253); " >{{ choice.product_pic }}</td>
+                        <td> <a href="/add/{{choice.id}}/{{buyer.id}}"><i class="bi bi-bag-plus-fill">Add</i></a></td>
+                        
+
+                    </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table-->
+    <!--{% else %}
+        <p>Sorry,No choices added yet!</p>
+    {% endif %}-->
+
+    
+    <!--Choices displayed for 1BHK-->
+    <h2  style="text-align:center;font-family:monospace; font-size: 140%; color: rgba(10, 10, 10, 0.804);">CHOICES</h2>
+    <p  style="text-align:center; color: rgba(10, 10, 10, 0.804);font-family:monospace;">{{type_home}}</p>
+    {% if choices %}
+
+    <body>
+        <div class="container">
+            {% for choice in choices %}
+            {% if type_home in choice.category_home %}
+            <div class="item">
+                <img src="{{ url_for('static', filename=choice.product_pic) }}" alt="{{choice.product_name }}">
+                <a href="/add/{{choice.id}}/{{buyer.id}}" <i class="bi bi-bag-plus-fill">Add</i></a>
+                
+                
+                <h2  style="text-align: center;font-size: 100%; color: rgba(10, 10, 10, 0.804);">Category {{choice.category_choice_extra}}</h2>
+                <h2  style="text-align: center;font-size: 100%; color: rgba(10, 10, 10, 0.804);">Product {{choice.product_name}}</h2>
+                <h2  style="text-align: center;font-size: 120%; color: rgba(10, 10, 10, 0.804);"><i class="bi bi-tag-fill"></i><i class="bi bi-currency-pound"></i>{{choice.price}}</h2>
+                
+                
+
+            </div>
+            {%endif %}
+            {% endfor %}
+        </div>
+    </body>
+    {% else %}
+        <p>Sorry,No choices added yet!</p>
+    {% endif %}
+    <!--Choices displyed for 1BHK-->
+
+    
+
+    <!--h2>EXTRAS</h2>
+    {% if extras %}
+        <table>
+         
+            <tbody>
+                {% for extra in extras %}
+                {% if extra.category_home==type_home %}
+                    <tr>
+                        <td>{{ extra.product_name }}</td>
+                        <td>{{ extra.price }}</td>
+                        <td>{{ extra.product_pic }}</td>
+                        <td> <a href="/add/{{extra.id}}/{{buyer.id}}">Add</a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Sorry, No extras added yet!</p>
+    
+    {% endif %}-->
+
+    <!--extras displayed for 1BHK-->
+    <br>
+    <br><br>
+    <h2 style="text-align:center;font-family:monospace; font-size: 140%; color: rgba(10, 10, 10, 0.804);">EXTRAS</h2>
+    <p  style="text-align:center; color: rgba(10, 10, 10, 0.804);font-family:monospace;">{{type_home}}</p>
+
+    {% if extras %}
+
+    <body>
+        <div class="container">
+            {% for extra in extras %}
+            {% if extra.category_home==type_home %}
+            <div class="item">
+                
+                <img src="{{ url_for('static', filename=extra.product_pic) }}" alt="{{ extra.product_name }}">
+                <a  href="/add/{{extra.id}}/{{buyer.id}}" <i class="bi bi-bag-plus-fill">Add</i></a>
+
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804); font-size: 100%;"> Category {{extra.category_choice_extra}}</h2>
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804);font-size: 100%;">Product {{extra.product_name}}</h2>
+                <h2  style="text-align: center; color: rgba(10, 10, 10, 0.804); font-size: 120%;""><i class="bi bi-tag-fill"></i><i class="bi bi-currency-pound"></i> {{extra.price}}</h2>
+                
+                
+
+            </div>
+            {%endif %}
+            {% endfor %}
+        </div>
+    </body>
+    {% else %}
+        <p>Sorry,No choices added yet!</p>
+    {% endif %}
+    <!--extras displayed for 1BHK-->
+
+    
+    <!--Submit -->
+    <div class="col-sm-offset-2 col-sm-10"><!--CSS bootstrap-->
+        {% if properties %}
+            {% for property in properties %} 
+                
+
+                    
+                <a href='/sendEmail/newhomebuilders5@gmail.com/ CHOICES & EXTRAS SECLETED -  PLOT ID:{{property.id}} /Greetings! Newhomes Builder,%0A%0A Buyer Name : {{buyer.fname}} %0A%0A ID NUMBER: {{buyer.id}} has selected the  choices & Extras for Reserved property PLOT ID {{property.id}} %0A%0A property category :{{property.category}} %0A%0A property price :{{property.price}}%0A%0AThe Selected products : %0A%0A{{idname}} ' class="btn btn-success">Submit</a>
+                    
+                
+                  
+            {% endfor %}
+        {% else %}
+            <p>no properties found</p>
+        {% endif %} 
+    </div>
+    <!--submit--> 
+
+
+    <!-- adapted from Bootstrap 5 -  Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
+
+<br>
+
+{% endblock %}

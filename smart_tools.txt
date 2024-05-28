@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+    <title>Smart Tools</title>
+  </head>
+  
+  <!--style-->
+    
+  <!--/style-->
+
+<body style="background-color: rgba(243, 239, 239, 0.918);">
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+            <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+        </nav>
+    </header>
+  
+
+<br><br><br>
+    <div class="container">
+      <div class="row g-3">
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card">
+            
+            <div class="card-body">
+              <img src="{{ url_for('static', filename='images/costplan.jpg')}}" alt="Cost palnner tool" class="card-img-top">
+              <h5 class="card-title">Cost Planner Tool</h5>
+              <p>We have developed this smart cost planning tool for making your calculations smarter!
+                Explore the new smart costplanner tool !
+              </p>
+              <!-- COST PLAN TOOL 1 -->
+              <a style="color: black;font-family: monospace;font-size:130%;" href="{{url_for('costplan')}}"<i class="bi bi-people-fill" style="color: black;">Cost Planner Tool</i></a>&nbsp;&nbsp;<br><br>
+              <!--COST PLAN TOOL 1 -->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card">
+            
+            <div class="card-body">
+              <img src="{{ url_for('static', filename='images/mort_calc.jpg')}}" alt="Cost palnner tool" class="card-img-top">
+              <h5 class="card-title">Mortgage Claculator</h5>
+              <p>We have developed this smart Mortgage calculator tool for making your calculations smarter!
+                Also check the afforability level by using the new Mortgage calculator !
+              </p>
+              <!-- COST PLAN TOOL 1 -->
+              <a style="color: black;font-family: monospace;font-size:130%;" href="{{url_for('mortgage_cal')}}"<i class="bi bi-people-fill" style="color: black;">Mortgage Claculator</i></a>&nbsp;&nbsp;<br><br>
+              <!--COST PLAN TOOL 1 -->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+          <div class="card">
+            
+            <div class="card-body">
+              <img src="{{ url_for('static', filename='images/progresstool.jpg')}}" alt="Cost palnner tool" class="card-img-top">
+              <h5 class="card-title">Progress Tool Bar </h5>
+              <p>We have developed this smart Progress bar tool for making it easier for you know the progress of Your Property! </p>
+              {% if properties %}
+              <h3  style="font-family:monospace;font-size:120%;">progress {{ properties.status }} %</h3>
+              <h3  style="font-family:monospace;font-size:120%;">estimated time {{ properties.estimated }} days </h3>
+              <label for="status">Property Progress Status:</label>
+              <progress id="status" value={{ properties.status }} min="10" max="100"></progress>
+      {%endif%}
+              
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+</body>
+</html>

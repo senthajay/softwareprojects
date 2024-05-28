@@ -1,0 +1,174 @@
+{% extends 'builderbase.html' %}
+
+{% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+
+  </head>
+  
+</html>
+
+
+<!-- To View Users Property and Extras link "user_property"-->
+<!--a style="color: black;font-family: monospace;font-size:130%;" href="{{url_for('builder_user_dashboard')}}"<i class="bi bi-people-fill" style="color: black;">View Buyers</i></a>&nbsp;&nbsp;<br><br-->
+<!-- To View Users Property and Extras link "user_property"-->
+
+<!-- To view properties and assign to users "add_property_To_User"-->
+<!--a style="color:black; font-family: monospace;font-size:130%; " href="{{url_for('builder_property_dashboard')}}"<i class="bi bi-house-door-fill" style="color:black;">NewHomes Properties</i></a><br><br-->
+
+
+<!-- To view choices & Extras and assign to users "add_choice_extra_To_User"-->
+<!--a style="color: black;font-family: monospace;font-size:120%;" href="{{url_for('builder_product_dashboard')}}"<i class="bi bi-bag-fill" style="color: black;">NewHomes Product</i></a>&nbsp;&nbsp; <br><br-->
+ 
+
+<!-- Add a new products- choices and extras link "add_products"-->
+<!--a style="color: black;font-family: monospace;font-size:120%;" href="{{url_for('builder_add_property')}}"<i class="bi bi-house-add-fill" style="color: black;">Upload new Properties</i></a>&nbsp;&nbsp;<br><br-->
+<!-- To View Users Property and Extras link "user_property"-->
+
+<!-- Add a new products- choices and extras link "add_products"-->
+<!--a style="color:black; font-family: monospace;font-size:120%; " href="{{url_for('builder_add_products')}}"<i class="bi bi-plus-circle-fill" style="color:black;">Upload New Products</i></a><br><br-->
+
+
+<br><br><br>
+<h2 style="font-family: monospace;font-size:150%;text-align: center;">Welcome To NewHome Builders Dashboard</h2>
+
+  <!--form method="POST" action="/builder_dashboard">
+    <label for="buyer_id">Buyer ID:</label>
+      <select id="buyer_id" name="buyer_id">
+        {% for buyer in buyers %}
+          <option value="{{ buyer.id }}">{{ buyer.fname }}</option>
+       {% endfor %}
+      </select>
+      <button type="submit">Select</button>
+
+  </form>
+
+  <form  method="POST" action="/builder_dashboard" class="d-inline-flex p-2">
+    <div class="input-group">
+      <label for ="category"> Category</label>
+        <select id="category" name="category">
+          {% for cproperty in cproperties %}
+            <option value="{{ cproperty.category }}">{{ cproperty.category }}</option>
+          {% endfor %}
+        </select>
+        <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
+    </div>
+  </form-->
+
+
+
+<!--form method="POST" action="/builder_dashboard">
+  <label for="category">Category:</label>
+  <select id="category" name="category">
+  
+      <option value="1bhk">1BHK</option>
+      <option value="2bhk">2BHK</option>
+      <option value="3bhk">3BHK</option>
+
+  </select>
+  <button type="submit">Select</button>
+</form>
+
+<h2>{{username}} Property Details</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Property ID</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Property Picture</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for property in properties %}
+        <tr>
+          <td>{{ property.id }}</td>
+          <td>{{ property.category }}</td>
+          <td>{{ property.price }}</td>
+          <td>{{ property.property_pic }}</td>
+          <div class="container py-4">
+            <div class="row">
+              <div class="col-12">
+                <img src="{{ url_for('static', filename=property.property_pic) }}" alt="Reserved Property Image" class="img-fluid">
+                <p>Price: ${{ property.price }}</p>
+              </div>
+            </div>
+          </div>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2>{{username}} Choices and Extras Details</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Choice extra name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock level</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in buyer_products %}
+        <tr>
+          <td>{{ product.product_name }}</td>
+          <td>{{ product.category_sub_home }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.stock }}</td>
+          <div class="container py-4">
+            <div class="row">
+              <div class="col-12">
+            <div class="container">
+              <div class="item">
+                <img src="{{ url_for('static', filename=product.product_pic) }}" alt="Reserved Property Image" class="img-fluid">
+                <p>Price: ${{ product.price }}</p>
+              </div>
+              </div>
+            </div>
+            </div>
+          </div>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+</tr>
+</thead>
+<DISPLAY ALL PROPERTIES>
+<h2>ALL PROPERTIES </h2>
+<tbody>
+  {% for propertyby_category in propertiesby_category %}
+    <tr>
+      <td>{{ propertyby_category.id }}</td>
+      <td>{{ propertyby_category.category }}</td>
+      <td>{{ propertyby_category.price }}</td>
+      <td>{{ propertyby_category.property_pic }}</td>
+      <div class="container py-4">
+        <div class="row">
+          <div class="col-12">
+            <img src="{{ url_for('static', filename=propertyby_category.property_pic) }}" alt="Reserved Property Image" class="img-fluid">
+            <p>Price: ${{ propertyby_category.price }}</p>
+          </div>
+        </div>
+      </div>
+    </tr>
+  {% endfor %}
+</tbody>
+</table-->
+
+
+{% endblock %}

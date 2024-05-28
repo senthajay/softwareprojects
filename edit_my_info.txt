@@ -1,0 +1,88 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- adapted from Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css"> 
+
+    
+  </head>
+  
+  <!--style-->
+    
+  <!--/style-->
+
+  <body>
+    
+    
+
+    <!-- adapted  Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
+
+
+
+<br>
+<h2 style="color:rgba(10, 10, 10, 0.804); font-size:160%;font-family: monospace; text-align: center;font-weight: bold;"><i class="bi bi-pencil-fill"></i>Edit Profile</h2><br>
+  <form method="POST" enctype="multipart/form-data">
+    <!--first name label Bootstrap class adapted-->
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <div class="form-group" style="width: 300px;">
+      <lable for="fname" style="font-size: 120%; color:rgba(10, 10, 10, 0.804); font-family: monospace;" >First Name:</lable>
+      <input type="text" class="form-control" id="fname" name="fname" pattern="[A-Za-z]+"title="Only characters are allowed" value="{{ fname }}">
+    </div>
+  </div>
+  
+    <!---->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="form-group"style="width: 300px;">
+        <label for="lname" style="font-size: 120%; color: rgba(10, 10, 10, 0.804); font-family:monospace;">Last Name:</label>
+        <input type="text" class="form-control" id="lname" name="lname" pattern="[A-Za-z]+"title="Only characters are allowed" value="{{ lname }}">
+      </div>
+    </div>
+    <!---->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="form-group"style="width: 300px;">
+        <label for="email" style="font-size:120%; color:rgba(10, 10, 10, 0.804); font-family: monospace;">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" value="{{ email }}">
+      </div>
+    </div>
+    <!---->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="form-group"style="width: 300px;">
+        <label for="phone" style="font-size:120%; color:rgba(10, 10, 10, 0.804); font-family: monospace;">Phone:</label>
+        <input type="text" class="form-control" id="phone" name="phone" value="{{ phone }}">
+      </div>
+    </div>
+    <!---->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="form-group"style="width: 300px;">
+        <label type="address" style="font-size: 120%; color: rgba(10, 10, 10, 0.804); font-family: monospace;">Address:</label>
+        <input type="text" class="form-control" id="address" name="address" value="{{ address }}">
+      </div>
+    </div>
+    <!---->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <div class="form-group"style="width: 300px;">
+        <label for="profile_picture" style="font-size: 120%; color: rgba(10, 10, 10, 0.804);font-family: monospace;">Profile Picture</label>
+        <input type="file" class="form-control-file" id="profile_picture" name="profile_picture" value="{{ profile_picture}}">
+      </div>
+    </div>
+    <!--CSS bootstrap adapted-->
+    <div style="display: flex; justify-content: center; align-items: center;">
+      <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill">&nbsp;</i>Save Changes</button>
+    </div>
+
+  </form>
+    
+
+{% endblock %}

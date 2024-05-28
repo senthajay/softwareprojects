@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Newhome{%endblock%}</title>
+    <link rel = "stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel = "stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css ">  <!--this is adapted from css bootstrap-->
+    <link rel = "stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css ">    <!--this is adapted from css bootstrap-->
+</head>
+<body style="background-color: rgba(243, 239, 239, 0.918);">
+    <header>
+        <nav class=" navbar navbar-expand-lg navbar-dark " style="background-color: rgba(10, 10, 10, 0.804);" > <!--bootstrap class adapted -->
+            <a class="navbar-brand fw-bold text-uppercase" style="font-family:'Courier New', Courier, monospace;" href="{{ url_for('home')}}">N e w h o m e &nbsp;B u i l d e r s </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"> </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    {% if buyer %}
+                        <li class="nav-item"><a class="nav-link" href="/smart_tools/{{buyer.id}}"><i class="bi bi-tools"></i> Smart Tools </a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url_for('edit_my_info')}}"><i class="fas fa-user"></i> Edit My Info</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url_for('change_password')}}"><i class="fas fa-key"></i> Change Password</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{url_for('logout')}}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                    
+
+                    
+                    
+                    {% endif %}
+
+                    
+                        
+
+                    
+
+
+                    
+                    
+                
+
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+
+    </main>
+<br><br><br>
+    <footer>
+        <p style="color:rgba(10, 10, 10, 0.804);">contact- (+44) 7766547890 <br> email- newhomebuilds@gmail.com   </p> <br> <p style="color: rgba(10, 10, 10, 0.804);">&copy; 2023. NewHome Buliders All rights reserved.</p>
+    </footer>
+<!--CSS bootstrap adapted -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>    
+</body>
+</html>
